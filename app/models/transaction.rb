@@ -1,4 +1,8 @@
 class Transaction < ApplicationRecord
-  belongs_to :source, class_name: "Account"
-  belongs_to :destination, class_name: "Account"
+  belongs_to :sender, class_name: "Account"
+  belongs_to :recipient, class_name: "Account"
+
+  validates :sender, presence: true
+  validates :recipient, presence: true
+  validates :amount, presence: true
 end

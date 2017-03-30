@@ -8,6 +8,7 @@
     <th>First name</th>
     <th>Last name</th>
     <th>Balance</th>
+    <th>Transactions</th>
   </tr>
 
   <% @accounts.each do |account| %>
@@ -16,6 +17,7 @@
       <td data-href="<%= account_path(account) %>"><%= account.first_name %></td>
       <td data-href="<%= account_path(account) %>"><%= account.last_name %></td>
       <td data-href="<%= account_path(account) %>"><%= account.balance %></td>
+      <td data-href="<%= account_path(account) %>"><%= account.unique_transactions.size %></td>
       <td><%= link_to 'Edit', edit_account_path(account) %></td>
       <td><%= link_to 'Destroy', account_path(account),
               method: :delete,
