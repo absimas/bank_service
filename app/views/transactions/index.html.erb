@@ -13,8 +13,8 @@
   <% @transactions.each do |transaction| %>
     <tr>
       <td><%= transaction.id %></td>
-      <td><%= transaction.sender_id %></td>
-      <td><%= transaction.recipient_id %></td>
+      <td><%= link_to transaction.sender_id, account_path(transaction.sender_id) %></td>
+      <td><%= link_to transaction.recipient_id, account_path(transaction.recipient_id) %></td>
       <td><%= transaction.amount %></td>
       <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
       <td><%= link_to 'Destroy', transaction_path(transaction),
