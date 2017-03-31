@@ -20,7 +20,7 @@ class Transaction < ApplicationRecord
     end
 
     def sufficient_sender_balance
-      if sender.balance < amount
+      if sender && sender.balance < amount
         errors.add(:sender, 'balance is lower than the requested transaction amount')
       end
     end
