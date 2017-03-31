@@ -53,6 +53,11 @@ class TransactionsController < ApplicationController
     render 'index'
   end
 
+  def account
+    @transactions = Transaction.where(recipient_id: params[:id]).or(Transaction.where(sender_id: params[:id]))
+    render 'index'
+  end
+
   private
     def transaction_params
       params.require(:transaction).permit(:sender_id, :recipient_id, :amount)
