@@ -73,8 +73,28 @@ class TransactionsController < ApplicationController
 
   def amount
     @transaction = Transaction.find(params[:id])
+    # Default amount and currency
     @amount = @transaction.amount
     @currency = 'EUR'
+
+    begin
+      # Convert currency to uppercase
+      params[:currency].upcase!
+
+      # Call API
+      url = "http://api.fixer.io/latest?symbols=#{params[:currency]}"
+      response = HTTParty.get(url, format: :json)
+      puts "API responded with: #{response}"
+      payload = response.parsed_response
+
+      # Parse response
+      rates = payload['rates']
+      rate = rates[params[:currency]]
+      @amount *= rate;
+      @currency = params[:currency]
+    rescue Exception => e
+      puts "Whoops caught: #{e}..."
+    end
 
     respond_to do |format|
       format.html
