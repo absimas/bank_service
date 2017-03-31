@@ -54,6 +54,17 @@ class AccountsController < ApplicationController
     redirect_to accounts_path
   end
 
+  def balance
+    @account = Account.find(params[:id])
+    @balance = @account.balance
+    @currency = 'EUR'
+
+    respond_to do |format|
+      format.html
+      format.json { render json: { balance: @balance, currency: @currency } }
+    end
+  end
+
   private
     def account_params
       params.require(:account).permit(:first_name, :last_name, :balance)

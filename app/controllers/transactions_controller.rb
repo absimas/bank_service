@@ -71,6 +71,17 @@ class TransactionsController < ApplicationController
     render 'index'
   end
 
+  def amount
+    @transaction = Transaction.find(params[:id])
+    @amount = @transaction.amount
+    @currency = 'EUR'
+
+    respond_to do |format|
+      format.html
+      format.json { render json: { amount: @amount, currency: @currency } }
+    end
+  end
+
   private
     def transaction_params
       params.require(:transaction).permit(:sender_id, :recipient_id, :amount)
