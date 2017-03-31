@@ -12,10 +12,10 @@
 
   <% @transactions.each do |transaction| %>
     <tr>
-      <td data-href="<%= transaction_path(transaction) %>"><%= transaction.id %></td>
-      <td data-href="<%= transaction_path(transaction) %>"><%= transaction.sender_id %></td>
-      <td data-href="<%= transaction_path(transaction) %>"><%= transaction.recipient_id %></td>
-      <td data-href="<%= transaction_path(transaction) %>"><%= transaction.amount %></td>
+      <td><%= transaction.id %></td>
+      <td><%= transaction.sender_id %></td>
+      <td><%= transaction.recipient_id %></td>
+      <td><%= transaction.amount %></td>
       <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
       <td><%= link_to 'Destroy', transaction_path(transaction),
               method: :delete,
