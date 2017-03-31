@@ -1,4 +1,6 @@
 class AccountsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+
   def new
     @account = Account.new
   end
@@ -15,10 +17,20 @@ class AccountsController < ApplicationController
 
   def show
     @account = Account.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @account }
+    end
   end
 
   def index
     @accounts = Account.all
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @accounts }
+    end
   end
 
   def edit
@@ -45,5 +57,12 @@ class AccountsController < ApplicationController
   private
     def account_params
       params.require(:account).permit(:first_name, :last_name, :balance)
+    end
+
+    def not_found(error)
+      respond_to do |format|
+        format.html { render 'errors/404' , status: 404 }
+        format.json { render json: { error: error.message }, status: :not_found }
+      end
     end
 end

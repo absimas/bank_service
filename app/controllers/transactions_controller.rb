@@ -1,4 +1,6 @@
 class TransactionsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+
   def new
     @transaction = Transaction.new
   end
@@ -15,10 +17,21 @@ class TransactionsController < ApplicationController
 
   def show
     @transaction = Transaction.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @transaction }
+    end
   end
 
   def index
     @transactions = Transaction.all
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @transactions }
+    end
+
   end
 
   def edit
@@ -61,5 +74,12 @@ class TransactionsController < ApplicationController
   private
     def transaction_params
       params.require(:transaction).permit(:sender_id, :recipient_id, :amount)
+    end
+
+    def not_found(error)
+      respond_to do |format|
+        format.html { render 'errors/404' , status: 404 }
+        format.json { render json: { error: error.message }, status: :not_found }
+      end
     end
 end
