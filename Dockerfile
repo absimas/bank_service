@@ -1,9 +1,15 @@
-FROM ruby:2.3.4-alpine
+FROM ruby:2.4.1
 
+# Update machine
+RUN apt-get update -qq 
+RUN apt-get install -y build-essential libpq-dev
+RUN apt-get install -y nodejs
+
+# Copy src files
 COPY src/ .
 
-RUN ["bundle", "install"]
+# Install gems
+RUN bundle install
 
-EXPOSE 3000/tcp
-
-CMD ["bin/rails", "server"]
+# Start server
+CMD ["bin/rails", "server", "-p80", "-b0.0.0.0"]
