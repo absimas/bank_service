@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   get '/transactions/account/:id', to: 'transactions#account', as: :account_transactions
   get '/accounts/:id/sent', to: 'transactions#sender', as: :transactions_sent_by
   get '/accounts/:id/received', to: 'transactions#recipient', as: :transactions_received_by
+  get '/accounts/by_name/:name', to: 'accounts#by_name', as: :accounts_by_name
 end

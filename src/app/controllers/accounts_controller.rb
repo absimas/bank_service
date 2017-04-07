@@ -85,6 +85,11 @@ class AccountsController < ApplicationController
     end
   end
 
+  def by_name
+    @accounts = Account.where('lower(first_name) = ?', params['name'].downcase)
+    render 'index'
+  end
+
   private
     def account_params
       params.require(:account).permit(:first_name, :last_name, :balance)
