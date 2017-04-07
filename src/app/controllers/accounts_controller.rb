@@ -25,7 +25,11 @@ class AccountsController < ApplicationController
   end
 
   def index
-    @accounts = Account.all
+    if (params.has_key?(:first_name))
+      @accounts = Account.where('lower(first_name) LIKE ?', "%#{params['first_name'].downcase}%")
+    else
+      @accounts = Account.all
+    end
 
     respond_to do |format|
       format.html
@@ -83,11 +87,6 @@ class AccountsController < ApplicationController
       format.html
       format.json { render json: { balance: @balance, currency: @currency } }
     end
-  end
-
-  def by_name
-    @accounts = Account.where('lower(first_name) = ?', params['name'].downcase)
-    render 'index'
   end
 
   private

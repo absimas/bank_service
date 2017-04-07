@@ -4,6 +4,14 @@
 
 <h1>Accounts:</h1>
 
+Find by name:
+<%= form_tag '/accounts', method: :get do |f| %>
+  <%= text_field_tag(:first_name, nil, placeholder: 'First name') %>
+  <%= submit_tag('Search') %>
+<% end %>
+
+<br/>
+
 <table>
   <tr>
     <th>ID</th>
