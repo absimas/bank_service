@@ -2,6 +2,15 @@
 
 <h1>Transactions:</h1>
 
+Find by sender/receiver name:
+<%= form_tag '/transactions', method: :get do |f| %>
+  <%= text_field_tag(:first_name, nil, placeholder: 'First name') %>
+  <%= submit_tag('Search') %>
+<% end %>
+
+<br/>
+
+
 <table>
   <tr>
     <th>ID</th>

@@ -25,7 +25,19 @@ class TransactionsController < ApplicationController
   end
 
   def index
-    @transactions = Transaction.all
+    @transactions = []
+    if (params.has_key?(:first_name))
+      # Find accounts
+      accounts = Account.where('lower(first_name) LIKE ?', "%#{params['first_name'].downcase}%")
+
+      # Extract ids
+      ids = accounts.map(&:id)
+
+      # Find transactions
+      @transactions = Transaction.where('recipient_id IN (?)', ids).or(Transaction.where('sender_id IN (?)', ids))
+    else
+      @transactions = Transaction.all
+    end
 
     respond_to do |format|
       format.html
@@ -101,17 +113,6 @@ class TransactionsController < ApplicationController
       format.json { render json: { amount: @amount, currency: @currency } }
     end
   end
-
-  def by_name
-    # Find accounts
-    accounts = Account.where('lower(first_name) = ?', params['name'])
-    # Extract ids
-    ids = accounts.map(&:id)
-    # Find transactions
-    @transactions = Transaction.where('recipient_id IN (?)', ids).or(Transaction.where('sender_id IN (?)', ids))
-    render 'index'
-  end
-
 
   private
     def transaction_params
