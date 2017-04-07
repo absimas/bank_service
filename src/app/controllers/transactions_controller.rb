@@ -102,6 +102,17 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def by_name
+    # Find accounts
+    accounts = Account.where('lower(first_name) = ?', params['name'])
+    # Extract ids
+    ids = accounts.map(&:id)
+    # Find transactions
+    @transactions = Transaction.where('recipient_id IN (?)', ids).or(Transaction.where('sender_id IN (?)', ids))
+    render 'index'
+  end
+
+
   private
     def transaction_params
       params.require(:transaction).permit(:sender_id, :recipient_id, :amount)
