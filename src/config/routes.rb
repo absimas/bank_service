@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :transactions
+  resources :transactions, except: :destroy
   resources :accounts
   get '/accounts/:id/balance', to: 'accounts#balance'
   get '/accounts/:id/balance/:currency', to: 'accounts#balance'

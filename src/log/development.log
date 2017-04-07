@@ -6887,3 +6887,81 @@ Processing by AccountsController#balance as JSON
 Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.2ms)
 
 
+Started GET "/accounts" for 127.0.0.1 at 2017-04-07 09:11:41 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by AccountsController#index as HTML
+  Rendering accounts/index.html.erb within layouts/application
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."sender_id" = ?[0m  [["sender_id", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."recipient_id" = ?[0m  [["recipient_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."sender_id" = ?[0m  [["sender_id", 5]]
+  [1m[36mTransaction Load (0.0ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."recipient_id" = ?[0m  [["recipient_id", 5]]
+  Rendered accounts/index.html.erb within layouts/application (48.4ms)
+Completed 200 OK in 507ms (Views: 497.3ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/transactions" for 127.0.0.1 at 2017-04-07 09:11:46 +0300
+Processing by TransactionsController#index as HTML
+  Rendering transactions/index.html.erb within layouts/application
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions"[0m
+  Rendered transactions/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 26ms (Views: 23.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/transactions" for 127.0.0.1 at 2017-04-07 09:12:45 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by TransactionsController#index as HTML
+  Rendering transactions/index.html.erb within layouts/application
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions"[0m
+  Rendered transactions/index.html.erb within layouts/application (10.1ms)
+Completed 200 OK in 296ms (Views: 288.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/transactions" for 127.0.0.1 at 2017-04-07 09:12:46 +0300
+Processing by TransactionsController#index as HTML
+  Rendering transactions/index.html.erb within layouts/application
+  [1m[36mTransaction Load (0.4ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions"[0m
+  Rendered transactions/index.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 33ms (Views: 29.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/accounts" for 127.0.0.1 at 2017-04-07 09:16:06 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by AccountsController#index as HTML
+  Rendering accounts/index.html.erb within layouts/application
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."sender_id" = ?[0m  [["sender_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."recipient_id" = ?[0m  [["recipient_id", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."sender_id" = ?[0m  [["sender_id", 5]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."recipient_id" = ?[0m  [["recipient_id", 5]]
+  Rendered accounts/index.html.erb within layouts/application (52.4ms)
+Completed 200 OK in 337ms (Views: 328.2ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/accounts" for 127.0.0.1 at 2017-04-07 09:16:38 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by AccountsController#index as HTML
+  Rendering accounts/index.html.erb within layouts/application
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."sender_id" = ?[0m  [["sender_id", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."recipient_id" = ?[0m  [["recipient_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."sender_id" = ?[0m  [["sender_id", 5]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."recipient_id" = ?[0m  [["recipient_id", 5]]
+  Rendered accounts/index.html.erb within layouts/application (64.4ms)
+Completed 200 OK in 361ms (Views: 351.5ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/transactions/new" for 127.0.0.1 at 2017-04-07 09:16:42 +0300
+Processing by TransactionsController#new as HTML
+  Rendering transactions/new.html.erb within layouts/application
+  Rendered transactions/new.html.erb within layouts/application (25.3ms)
+Completed 200 OK in 51ms (Views: 49.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/accounts/new" for 127.0.0.1 at 2017-04-07 09:16:45 +0300
+Processing by AccountsController#new as HTML
+  Rendering accounts/new.html.erb within layouts/application
+  Rendered accounts/new.html.erb within layouts/application (13.9ms)
+Completed 200 OK in 75ms (Views: 72.3ms | ActiveRecord: 0.0ms)
+
+
