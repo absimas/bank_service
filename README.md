@@ -11,15 +11,15 @@
 
 ## Endpoints
 
-| Endpoint               | Explanation                                        |
-| ---------------------- | --------------------------------------------------:|
-|/accounts               | all accounts                                       |
-|/accounts/1             | account with id 1                                  |
-|/accounts/1/sent        | transactions sent by account with id 1             |
-|/accounts/1/received    | transactions received by account with id 1         |
-|/transactions/account/1 | all transactions associated with account with id 1 |
-|/transactions           | all transactions                                   |
-|/transactions/1         | transaction with id 1                              |
+| Endpoint               | Actions                   | Explanation                                        |
+| ---------------------- |:-------------------------:| --------------------------------------------------:|
+|/accounts               | GET POST                  | list of accounts / account creation                |
+|/accounts/1             | GET DELETE PUT PATCH      | actions with account with id 1                     |
+|/accounts/1/sent        | GET                       | transactions sent by account with id 1             |
+|/accounts/1/received    | GET                       | transactions received by account with id 1         |
+|/transactions/account/1 | GET                       | all transactions associated with account with id 1 |
+|/transactions           | GET POST                  | list of transactions / transaction creation        |
+|/transactions/1         | GET PUT PATCH             | actions with transaction with id 1                 |
 
 ## Structure
 ### Account
