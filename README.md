@@ -1,8 +1,13 @@
 # Bank service
-## Installation
 
-* docker build -t absimas/bank:1.0 .
-* docker run -p 80:80 -d absimas/bank:1.0
+## Installing existing build
+
+* docker run -p 80:80 -d absimas/bank
+
+## Fresh build
+
+* docker build -t absimas/bank .
+* docker run -p 80:80 -d absimas/bank
 
 ## Endpoints
 
