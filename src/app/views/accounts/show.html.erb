@@ -10,7 +10,7 @@
 
 <p>
   <strong>Balance (EUR):</strong>
-  <%= @account.balance %>
+  <%= link_to @account.balance, account_balance_path(@account) %>
 </p>
 
 <p>

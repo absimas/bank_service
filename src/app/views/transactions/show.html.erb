@@ -10,7 +10,7 @@
 
 <p>
   <strong>Amount (EUR):</strong>
-  <%= @transaction.amount %>
+  <%= link_to @transaction.amount, transaction_amount_path(@transaction) %>
 </p>
 
 <%= link_to 'Edit', edit_transaction_path(@transaction) %> |
