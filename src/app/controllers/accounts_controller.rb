@@ -63,7 +63,7 @@ class AccountsController < ApplicationController
     @account = Account.find(params[:id])
     @account.destroy
 
-    redirect_to accounts_path
+    redirect_to accounts_path, status: 303
   end
 
   def balance

@@ -72,7 +72,7 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.find(params[:id])
     @transaction.destroy
 
-    redirect_to transactions_path
+    redirect_to transactions_path, status: 303
   end
 
   def sender
