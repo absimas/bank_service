@@ -56,9 +56,15 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.find(params[:id])
 
     if @transaction.update(transaction_params)
-      redirect_to @transaction
+      respond_to do |format|
+        format.html { redirect_to @transaction }
+        format.json { render json: @account }
+      end
     else
-      render 'edit'
+      respond_to do |format|
+        format.html { render 'edit' }
+        format.json { head 400 }
+      end
     end
   end
 

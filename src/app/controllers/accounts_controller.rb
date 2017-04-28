@@ -47,9 +47,15 @@ class AccountsController < ApplicationController
     @account = Account.find(params[:id])
 
     if @account.update(account_params)
-      redirect_to @account
+      respond_to do |format|
+        format.html { redirect_to @account }
+        format.json { render json: @account }
+      end
     else
-      render 'edit'
+      respond_to do |format|
+        format.html { render 'edit' }
+        format.json { head 400 }
+      end
     end
   end
 
