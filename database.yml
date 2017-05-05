@@ -1,0 +1,6 @@
+database:
+  image: absimas/bank_database
+  environment:
+    SERVICE_NAME: 'database'
+    SERVICE_CHECK_HTTP: '/'
+    SERVICE_CHECK_INTERVAL: '5s'

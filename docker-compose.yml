@@ -1,0 +1,21 @@
+consul:
+  command: -server -bootstrap
+  image: progrium/consul:latest
+  container_name: 'consul'
+  ports:
+    - '8500:8500'
+haproxy:
+  image: camptocamp/haproxy-consul:latest
+  container_name: 'haproxy'
+  ports:
+    - '80:80'
+  links:
+    - 'consul'
+registrator:
+  command: '-internal consul://consul:8500'
+  image: gliderlabs/registrator:latest
+  container_name: 'registrator'
+  links:
+    - 'consul'
+  volumes:
+    - '/var/run/docker.sock:/tmp/docker.sock'
