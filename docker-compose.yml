@@ -1,21 +1,56 @@
-consul:
-  command: -server -bootstrap
-  image: progrium/consul:latest
-  container_name: 'consul'
-  ports:
-    - '8500:8500'
-haproxy:
-  image: camptocamp/haproxy-consul:latest
-  container_name: 'haproxy'
-  ports:
-    - '80:80'
-  links:
-    - 'consul'
-registrator:
-  command: '-internal consul://consul:8500'
-  image: gliderlabs/registrator:latest
-  container_name: 'registrator'
-  links:
-    - 'consul'
-  volumes:
-    - '/var/run/docker.sock:/tmp/docker.sock'
+version: '2'
+services:
+  consul:
+    image: progrium/consul
+    # a server node governs other agents connected to this instance
+    # bootstrap means this is the first node in this cluster
+    # on our example only one instance of consul is run so these options do not change
+    command: -server -bootstrap
+    container_name: 'consul'
+    ports:
+      - '8500:8500'
+    environment:
+      SERVICE_IGNORE: 'always'
+  haproxy:
+    image: absimas/bank_haproxy
+    container_name: 'haproxy'
+    ports:
+      - '8080:8080'
+      - '3306:3306'
+    depends_on:
+      - 'consul'
+    environment:
+      SERVICE_IGNORE: 'always'
+  registrator:
+    image: gliderlabs/registrator:v7
+    command: '-internal consul://consul:8500'
+    container_name: 'registrator'
+    volumes:
+      - '/var/run/docker.sock:/tmp/docker.sock'
+    depends_on:
+      - 'consul'
+    environment:
+      SERVICE_IGNORE: 'always'
+  galera_root:
+    command: --wsrep-cluster-name=galera_cluster --wsrep-cluster-address=gcomm://
+    image: absimas/bank_galera
+    container_name: 'galera_root'
+    volumes:
+      - './db/mysql:/var/lib/mysql'
+    depends_on:
+      - 'registrator'
+    expose:
+      - '3306'
+    environment:
+      SERVICE_NAME: 'galera_root'
+  galera:
+    command: --wsrep-cluster-name=galera_cluster --wsrep-cluster-address=gcomm://galera_root
+    image: absimas/bank_galera
+    links:
+      - 'galera_root'
+    depends_on:
+      - 'galera_root'
+    expose:
+      - '3306'
+    environment:
+      SERVICE_NAME: 'galera'
