@@ -1,25 +1,25 @@
 # Bank service
+## Service discovery
+![process](/process.png)
 
-## Installing existing build
+## Execution
+### Build
+* docker build -t absimas/bank main
+* docker build -t absimas/bank_galera db
+* docker build -t absimas/bank_haproxy haproxy
 
-* docker run -p 80:80 -d absimas/bank
+### Base services
+* docker run -p 80:80 --net host -d absimas/bank
+* docker-compose up -d
 
-## Fresh build
+### Database scaling
+* docker-compose scale galera=3
 
-* docker build -t absimas/bank .
-* docker run -p 80:80 -d absimas/bank
-
-## Endpoints
-
-| Endpoint               | Actions                   | Explanation                                        |
-| ---------------------- |:-------------------------:| --------------------------------------------------:|
-|/accounts               | GET POST                  | list of accounts / account creation                |
-|/accounts/1             | GET DELETE PUT PATCH      | actions with account with id 1                     |
-|/accounts/1/sent        | GET                       | transactions sent by account with id 1             |
-|/accounts/1/received    | GET                       | transactions received by account with id 1         |
-|/transactions/account/1 | GET                       | all transactions associated with account with id 1 |
-|/transactions           | GET POST                  | list of transactions / transaction creation        |
-|/transactions/1         | GET PUT PATCH             | actions with transaction with id 1                 |
+### Links
+* http://127.0.0.1:8080 - haproxy stats
+* http://127.0.0.1:8500 - consul dashboard
+* http://127.0.0.1/accounts - bank accounts
+* http://127.0.0.1/transactions - bank transactions
 
 ## Structure
 ### Account
@@ -41,6 +41,17 @@
 "amount": 10.0
 }
 ```
+
+## Endpoints
+| Endpoint               | Actions                   | Explanation                                        |
+| ---------------------- |:-------------------------:| --------------------------------------------------:|
+|/accounts               | GET POST                  | list of accounts / account creation                |
+|/accounts/1             | GET DELETE PUT PATCH      | actions with account with id 1                     |
+|/accounts/1/sent        | GET                       | transactions sent by account with id 1             |
+|/accounts/1/received    | GET                       | transactions received by account with id 1         |
+|/transactions/account/1 | GET                       | all transactions associated with account with id 1 |
+|/transactions           | GET POST                  | list of transactions / transaction creation        |
+|/transactions/1         | GET PUT PATCH             | actions with transaction with id 1                 |
 
 # External currency service
 http://api.fixer.io/latest?symbols=GBP
