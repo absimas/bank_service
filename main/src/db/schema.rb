@@ -12,22 +12,22 @@
 
 ActiveRecord::Schema.define(version: 20170330190016) do
 
-  create_table "accounts", force: :cascade do |t|
+  create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.float    "balance"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.float    "balance",    limit: 24
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
-  create_table "transactions", force: :cascade do |t|
+  create_table "transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "sender_id"
     t.integer  "recipient_id"
-    t.float    "amount"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["recipient_id"], name: "index_transactions_on_recipient_id"
-    t.index ["sender_id"], name: "index_transactions_on_sender_id"
+    t.float    "amount",       limit: 24
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["recipient_id"], name: "index_transactions_on_recipient_id", using: :btree
+    t.index ["sender_id"], name: "index_transactions_on_sender_id", using: :btree
   end
 
 end
