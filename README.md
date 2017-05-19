@@ -9,7 +9,7 @@
 * docker build -t absimas/bank_haproxy haproxy
 
 ### Base services
-* docker run -p 80:80 --net host -d absimas/bank
+* docker run --net host -d absimas/bank
 * docker-compose up -d
 
 ### Database scaling
