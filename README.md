@@ -1,4 +1,6 @@
 # Bank service
+Web Service course assignment #3
+
 ## Service discovery
 ![process](/process.png)
 
