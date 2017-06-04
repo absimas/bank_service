@@ -1,5 +1,15 @@
 version: '2'
 services:
+  bank:
+    image: absimas/bank
+    container_name: 'bank'
+    ports:
+      - '80:80'
+    depends_on:
+      - 'haproxy'
+      - 'consul'
+      - 'galera_root'
+      - 'registrator'
   consul:
     image: progrium/consul
     # a server node governs other agents connected to this instance

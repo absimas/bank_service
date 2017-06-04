@@ -6,12 +6,11 @@ Web Service course assignment #3
 
 ## Execution
 ### Build
-* docker build -t absimas/bank main
+* docker build -t absimas/bank bank
 * docker build -t absimas/bank_galera db
 * docker build -t absimas/bank_haproxy haproxy
 
 ### Base services
-* docker run --net host -d absimas/bank
 * docker-compose up -d
 
 ### Database scaling
